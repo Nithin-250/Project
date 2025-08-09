@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustLens Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .metric-card {
+            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        .chart-container {
+            background: rgba(26, 35, 126, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white min-h-screen">
+
+    <!-- Header -->
+    <header class="header relative z-50">
+        <div class="container">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                    <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                </svg>
+                <span class="logo-text">TRUSTLENS</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="fraudcheck.html" class="nav-link">FRAUDCHECK</a>
+                <a href="analytics.html" class="nav-link active">ANALYTICS</a>
+                <a href="dashboard.html" class="nav-link">DASHBOARD</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main pt-24">
+        <div class="container mx-auto px-4">
+            
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Analytics Dashboard
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Real-time fraud detection analytics and insights powered by AI
+                </p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">📊</div>
+                        <div id="totalTransactionsChange" class="text-green-400 text-sm">+12.5%</div>
+                    </div>
+                    <div class="text-2xl font-bold" id="totalTransactions">0</div>
+                    <div class="text-gray-300 text-sm">Total Transactions</div>
+                </div>
+
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">🚨</div>
+                        <div id="fraudRateChange" class="text-red-400 text-sm">-2.1%</div>
+                    </div>
+                    <div class="text-2xl font-bold" id="fraudDetected">0</div>
+                    <div class="text-gray-300 text-sm">Fraud Detected</div>
+                </div>
+
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">💰</div>
+                        <div id="amountSavedChange" class="text-green-400 text-sm">+45.2%</div>
+                    </div>
+                    <div class="text-2xl font-bold">₹<span id="amountSaved">0</span></div>
+                    <div class="text-gray-300 text-sm">Amount Saved</div>
+                </div>
+
+                <div class="metric-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">🎯</div>
+                        <div id="accuracyChange" class="text-green-400 text-sm">+0.3%</div>
+                    </div>
+                    <div class="text-2xl font-bold" id="accuracy">99.7%</div>
+                    <div class="text-gray-300 text-sm">Detection Accuracy</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <!-- Transaction Volume Chart -->
+                <div class="chart-container p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">Transaction Volume (24h)</h3>
+                    <canvas id="volumeChart" height="300"></canvas>
+                </div>
+
+                <!-- Fraud Detection Chart -->
+                <div class="chart-container p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">Fraud Detection Rate</h3>
+                    <canvas id="fraudChart" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Risk Analysis Section -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                <div class="chart-container p-6 rounded-2xl lg:col-span-2">
+                    <h3 class="text-xl font-bold mb-4">Risk Score Distribution</h3>
+                    <canvas id="riskChart" height="200"></canvas>
+                </div>
+
+                <div class="chart-container p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">Top Risk Factors</h3>
+                    <div id="riskFactors" class="space-y-3">
+                        <!-- Risk factors will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Activity Feed -->
+            <div class="chart-container p-6 rounded-2xl mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Real-time Activity Feed</h3>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-gray-300">Live</span>
+                    </div>
+                </div>
+                <div id="activityFeed" class="space-y-3 max-h-64 overflow-y-auto">
+                    <!-- Activity feed will be populated here -->
+                </div>
+            </div>
+
+            <!-- API Health Status -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="chart-container p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">System Health</h3>
+                    <div id="systemHealth" class="space-y-4">
+                        <!-- Health indicators will be populated here -->
+                    </div>
+                </div>
+
+                <div class="chart-container p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button id="refreshDataBtn" class="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                            🔄 Refresh All Data
+                        </button>
+                        <button id="exportDataBtn" class="w-full px-4 py-3 bg-green-600 hover:bg-green-700 rounded-lg transition">
+                            📊 Export Analytics
+                        </button>
+                        <button onclick="window.location.href='fraudcheck.html'" class="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition">
+                            🛡️ Run Fraud Check
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-16">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                            <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                            <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                        </svg>
+                        <span class="logo-text">TRUSTLENS</span>
+                    </div>
+                    <p>AI-powered fraud detection analytics for the Indian financial market.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TRUSTLENS AI ANALYST. All rights reserved. Made in India 🇮🇳</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = window.location.hostname === 'localhost'
+            ? 'http://localhost:3001'
+            : 'https://trustlens-fraud-api.onrender.com';
+
+        // Initialize charts and dashboard
+        let volumeChart, fraudChart, riskChart;
+        
+        // Initialize the dashboard
+        async function initDashboard() {
+            await loadStatistics();
+            await loadHealthStatus();
+            initCharts();
+            startRealTimeUpdates();
+        }
+
+        // Load statistics from API
+        async function loadStatistics() {
+            try {
+                const response = await fetch(`${API_BASE}/stats`);
+                const stats = await response.json();
+                
+                document.getElementById('totalTransactions').textContent = stats.total_transactions;
+                document.getElementById('fraudDetected').textContent = stats.fraudulent_transactions;
+                document.getElementById('amountSaved').textContent = stats.amount_saved.toLocaleString();
+                
+                const fraudRate = stats.fraud_rate_percentage;
+                document.getElementById('accuracy').textContent = `${(100 - fraudRate).toFixed(1)}%`;
+                
+            } catch (error) {
+                console.error('Error loading statistics:', error);
+            }
+        }
+
+        // Load health status
+        async function loadHealthStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const health = await response.json();
+                
+                const healthHtml = `
+                    <div class="flex items-center justify-between p-3 rounded-lg ${health.status === 'healthy' ? 'bg-green-900 bg-opacity-50' : 'bg-red-900 bg-opacity-50'}">
+                        <span>API Status</span>
+                        <span class="${health.status === 'healthy' ? 'text-green-400' : 'text-red-400'}">${health.status.toUpperCase()}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-lg ${health.mongodb ? 'bg-green-900 bg-opacity-50' : 'bg-yellow-900 bg-opacity-50'}">
+                        <span>MongoDB</span>
+                        <span class="${health.mongodb ? 'text-green-400' : 'text-yellow-400'}">${health.mongodb ? 'CONNECTED' : 'OFFLINE'}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-lg bg-blue-900 bg-opacity-50">
+                        <span>Version</span>
+                        <span class="text-blue-400">${health.version}</span>
+                    </div>
+                `;
+                
+                document.getElementById('systemHealth').innerHTML = healthHtml;
+                
+            } catch (error) {
+                console.error('Error loading health status:', error);
+            }
+        }
+
+        // Initialize charts
+        function initCharts() {
+            // Volume Chart
+            const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+            volumeChart = new Chart(volumeCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 24}, (_, i) => `${i}:00`),
+                    datasets: [{
+                        label: 'Transaction Volume',
+                        data: Array.from({length: 24}, () => Math.floor(Math.random() * 100) + 50),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.1)' } }
+                    }
+                }
+            });
+
+            // Fraud Chart
+            const fraudCtx = document.getElementById('fraudChart').getContext('2d');
+            fraudChart = new Chart(fraudCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Safe Transactions', 'Fraud Detected'],
+                    datasets: [{
+                        data: [85, 15],
+                        backgroundColor: ['#10b981', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Risk Chart
+            const riskCtx = document.getElementById('riskChart').getContext('2d');
+            riskChart = new Chart(riskCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+                    datasets: [{
+                        label: 'Number of Transactions',
+                        data: [450, 120, 30],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.1)' } }
+                    }
+                }
+            });
+        }
+
+        // Populate risk factors
+        function populateRiskFactors() {
+            const riskFactors = [
+                { name: 'Unusual Amount', count: 23, color: 'text-red-400' },
+                { name: 'Odd Hours', count: 15, color: 'text-orange-400' },
+                { name: 'Geo Anomaly', count: 12, color: 'text-yellow-400' },
+                { name: 'Blacklisted Account', count: 8, color: 'text-red-400' },
+                { name: 'IP Risk', count: 5, color: 'text-orange-400' }
+            ];
+
+            const html = riskFactors.map(factor => `
+                <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800 bg-opacity-50">
+                    <span class="text-sm">${factor.name}</span>
+                    <span class="${factor.color} font-semibold">${factor.count}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('riskFactors').innerHTML = html;
+        }
+
+        // Add activity to feed
+        function addActivityToFeed(activity) {
+            const feed = document.getElementById('activityFeed');
+            const activityHtml = `
+                <div class="flex items-center justify-between p-3 rounded-lg bg-gray-800 bg-opacity-50">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-xl">${activity.icon}</div>
+                        <div>
+                            <div class="text-sm">${activity.message}</div>
+                            <div class="text-xs text-gray-400">${activity.time}</div>
+                        </div>
+                    </div>
+                    <div class="text-sm ${activity.type === 'fraud' ? 'text-red-400' : 'text-green-400'}">
+                        ${activity.type.toUpperCase()}
+                    </div>
+                </div>
+            `;
+            
+            feed.insertAdjacentHTML('afterbegin', activityHtml);
+            
+            // Keep only last 10 activities
+            const activities = feed.children;
+            if (activities.length > 10) {
+                activities[activities.length - 1].remove();
+            }
+        }
+
+        // Start real-time updates
+        function startRealTimeUpdates() {
+            setInterval(() => {
+                const activities = [
+                    { icon: '✅', message: 'Transaction approved - Chennai to Mumbai', type: 'safe', time: new Date().toLocaleTimeString() },
+                    { icon: '🚨', message: 'Fraud detected - Unusual amount pattern', type: 'fraud', time: new Date().toLocaleTimeString() },
+                    { icon: '🔍', message: 'Risk analysis completed', type: 'analysis', time: new Date().toLocaleTimeString() }
+                ];
+                
+                const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                addActivityToFeed(randomActivity);
+            }, 5000);
+        }
+
+        // Event listeners
+        document.getElementById('refreshDataBtn').addEventListener('click', async () => {
+            await loadStatistics();
+            await loadHealthStatus();
+        });
+
+        document.getElementById('exportDataBtn').addEventListener('click', () => {
+            alert('Export functionality would be implemented here');
+        });
+
+        // Initialize dashboard on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initDashboard();
+            populateRiskFactors();
+        });
+    </script>
+</body>
+</html>

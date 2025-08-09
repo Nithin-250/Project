@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI ANALYST - Intelligent Financial Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                    <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                </svg>
+                <span class="logo-text">TRUSTLENS</span>
+            </div>
+            <nav class="nav">
+                <a href="#home" class="nav-link active">HOME</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#pricing" class="nav-link">PRICING</a>
+                <a href="fraudcheck.html" class="nav-link">FRAUDCHECK</a>
+                <a href="#contact" class="nav-link">CONTACT US</a>
+                <a href="./dashboard.html" class="nav-link">DEEP ANALYSIS</a>
+            </nav>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero section">
+            <div class="hero-background">
+                <div class="finance-globe"></div>
+                <div class="data-particles"></div>
+                <div class="connection-lines"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">🏦 Financial Intelligence Platform</div>
+                    <h1 class="hero-title">AI ANALYST</h1>
+                    <p class="hero-subtitle">Advanced Financial Intelligence for Modern Banking</p>
+                    <p class="hero-description">
+                        Harness the power of artificial intelligence to transform financial decision-making. 
+                        Our enterprise-grade platform delivers real-time risk assessment, fraud detection, 
+                        and market intelligence specifically designed for Indian financial institutions.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">99.7%</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">₹1.25L</span>
+                            <span class="stat-label">Saved Daily</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">847+</span>
+                            <span class="stat-label">Transactions</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('pricing')">
+                            <span>Explore Solutions</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1L15 8L8 15M15 8H1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.location.href='fraudcheck.html'">
+                            <span>🛡️ FRAUDCHECK</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.location.href='dashboard.html'">
+                            <span>📊 Deep Analysis</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">
+                            <span>Schedule Demo</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="finance-dashboard">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <span class="card-title">Market Analysis</span>
+                                <span class="status-indicator live"></span>
+                            </div>
+                            <div class="chart-placeholder">
+                                <div class="chart-line"></div>
+                                <div class="data-points"></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <span class="card-title">Risk Assessment</span>
+                                <span class="risk-level low">LOW</span>
+                            </div>
+                            <div class="risk-meter">
+                                <div class="meter-fill"></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <span class="card-title">Fraud Detection</span>
+                                <span class="alert-count">3</span>
+                            </div>
+                            <div class="fraud-alerts">
+                                <div class="alert-item">Suspicious transaction flagged</div>
+                                <div class="alert-item">Pattern anomaly detected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="about" class="features section">
+            <div class="container">
+                <h2 class="section-title">Why Choose AI ANALYST?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-Time Analytics</h3>
+                        <p>Get instant insights on financial transactions and market trends in Indian Rupees.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Advanced Security</h3>
+                        <p>AI-powered fraud detection specifically designed for Indian banking systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🇮🇳</div>
+                        <h3>India-First Approach</h3>
+                        <p>Built for Indian markets with support for UPI, NEFT, RTGS, and local payment methods.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Mobile Ready</h3>
+                        <p>Access your financial analytics anywhere with our responsive design.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Process thousands of transactions per second with sub-millisecond response times.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Smart Predictions</h3>
+                        <p>Machine learning algorithms trained on Indian financial data patterns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing section">
+            <div class="container">
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p class="section-subtitle">Affordable pricing for businesses of all sizes in India</p>
+                
+                <div class="pricing-grid">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h3 class="plan-name">Basic</h3>
+                            <p class="plan-description">Perfect for small businesses and startups</p>
+                            <div class="plan-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">999</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✓ Basic transaction analysis</li>
+                            <li>✓ Up to 10,000 transactions/month</li>
+                            <li>✓ Email support</li>
+                            <li>✓ Basic fraud detection</li>
+                            <li>✓ Monthly reports</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('basic')">Choose Basic</button>
+                    </div>
+
+                    <!-- Professional Plan -->
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="plan-header">
+                            <h3 class="plan-name">Professional</h3>
+                            <p class="plan-description">Ideal for growing businesses</p>
+                            <div class="plan-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">2,499</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✓ Advanced AI pattern detection</li>
+                            <li>✓ Up to 100,000 transactions/month</li>
+                            <li>✓ Priority support</li>
+                            <li>✓ Real-time alerts</li>
+                            <li>✓ Custom dashboards</li>
+                            <li>✓ API access</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('professional')">Choose Professional</button>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h3 class="plan-name">Enterprise</h3>
+                            <p class="plan-description">For large organizations</p>
+                            <div class="plan-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">4,999</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✓ Enterprise-grade security</li>
+                            <li>✓ Unlimited transactions</li>
+                            <li>✓ 24/7 dedicated support</li>
+                            <li>✓ Custom AI model training</li>
+                            <li>✓ White-label solution</li>
+                            <li>✓ On-premise deployment</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="selectPlan('enterprise')">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Analyst Demo Section -->
+        <section id="ai-analyst" class="demo section">
+            <div class="container">
+                <h2 class="section-title">AI ANALYST Dashboard</h2>
+                <p class="section-subtitle">Experience the power of AI-driven financial analysis</p>
+                
+                <div class="demo-container">
+                    <div class="demo-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="transactionsProcessed">0</div>
+                            <div class="stat-label">Transactions Processed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="fraudDetected">0</div>
+                            <div class="stat-label">Fraud Attempts Blocked</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">₹<span id="amountSaved">0</span></div>
+                            <div class="stat-label">Amount Saved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="accuracy">99.7</div>
+                            <div class="stat-label">Accuracy %</div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-chart">
+                        <h3>Live Transaction Analysis</h3>
+                        <div class="chart-container">
+                            <canvas id="transactionChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <h2 class="section-title">Get Started Today</h2>
+                <p class="section-subtitle">Ready to transform your financial analysis with AI?</p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>abc@aianalyst.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <span>XXXXXXXXXXX</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>VIT Chennai, Chennai</span>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Plan Interest</option>
+                                <option value="basic">Basic Plan</option>
+                                <option value="professional">Professional Plan</option>
+                                <option value="enterprise">Enterprise Plan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Tell us about your requirements" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                            <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                            <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                        </svg>
+                        <span class="logo-text">TRUSTLENS</span>
+                    </div>
+                    <p>AI-powered financial analysis for the Indian market. Secure, intelligent, and built for India.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="fraudcheck.html">Fraudcheck</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#ai-analyst">AI Analyst</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">🔗</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 TRUSTLENS AI ANALYST. All rights reserved. Made in India 🇮🇳</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Functions
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function selectPlan(plan) {
+            alert(`You selected the ${plan} plan! Redirecting to contact form...`);
+            scrollToSection('contact');
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('mobile-active');
+        }
+
+        // Demo Animation (Simple version)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate counters
+            const transactionsElement = document.getElementById('transactionsProcessed');
+            const fraudElement = document.getElementById('fraudDetected');
+            const savedElement = document.getElementById('amountSaved');
+            
+            let transactions = 0;
+            let fraud = 0;
+            let saved = 0;
+            
+            const interval = setInterval(() => {
+                if (transactions < 847) {
+                    transactions += Math.floor(Math.random() * 10) + 1;
+                    transactionsElement.textContent = Math.min(transactions, 847);
+                }
+                
+                if (fraud < 23) {
+                    fraud += Math.floor(Math.random() * 2);
+                    fraudElement.textContent = Math.min(fraud, 23);
+                }
+                
+                if (saved < 125000) {
+                    saved += Math.floor(Math.random() * 1000) + 100;
+                    savedElement.textContent = Math.min(saved, 125000).toLocaleString();
+                }
+                
+                if (transactions >= 847 && fraud >= 23 && saved >= 125000) {
+                    clearInterval(interval);
+                }
+            }, 100);
+        });
+
+        // Add click handlers for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle FRAUDCHECK navigation
+            const fraudCheckLinks = document.querySelectorAll('a[href="fraudcheck.html"], a[href="./fraudcheck.html"]');
+            fraudCheckLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Let the browser handle the navigation naturally
+                    console.log('Navigating to FraudCheck page...');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

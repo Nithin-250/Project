@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAUDCHECK - TrustLens AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fraud-card {
+            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .fraud-input {
+            background: rgba(26, 35, 126, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.5);
+            color: white;
+        }
+        .fraud-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+        .fraud-btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        .fraud-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        .fraud-alert-safe {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-left: 4px solid #34d399;
+        }
+        .fraud-alert-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-left: 4px solid #f87171;
+        }
+        .transaction-item {
+            background: rgba(26, 35, 126, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .transaction-item:hover {
+            transform: translateX(5px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white min-h-screen">
+
+    <!-- Header -->
+    <header class="header relative z-50">
+        <div class="container">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                    <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                </svg>
+                <span class="logo-text">TRUSTLENS</span>
+            </div>
+            <nav class="nav">
+                <a href="fraudcheck.html" class="nav-link active">FRAUDCHECK</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blue highlight line -->
+    <div class="w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+
+    <!-- Main Content -->
+    <main class="main relative">
+        <!-- Hero Section -->
+        <section class="py-12 relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-sm font-medium mb-4">
+                        🛡️ Advanced Fraud Detection
+                    </div>
+                    <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        FRAUDCHECK System
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Real-time AI-powered fraud detection system with behavioral analysis, 
+                        geographic monitoring, and blacklist management for Indian financial institutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Fraud Detection Interface -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                    <!-- Transaction Submission Form -->
+                    <div class="fraud-card p-8 rounded-2xl">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            📊 Submit Transaction Analysis
+                        </h2>
+                        <form id="fraudTransactionForm" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Amount (₹)</label>
+                                    <input type="number" name="amount" step="0.01" required 
+                                        class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none" 
+                                        placeholder="Enter amount">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Currency</label>
+                                    <select name="currency" required class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none">
+                                        <option value="">Select Currency</option>
+                                        <option value="INR" selected>INR (₹)</option>
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Location</label>
+                                    <select name="location" required class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none">
+                                        <option value="">Select Location</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Pune">Pune</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Card Type</label>
+                                    <select name="card_type" required class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none">
+                                        <option value="">Select Card Type</option>
+                                        <option value="Visa">Visa</option>
+                                        <option value="Mastercard">Mastercard</option>
+                                        <option value="RuPay">RuPay</option>
+                                        <option value="American Express">American Express</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Sender Account</label>
+                                    <input type="text" name="sender_account_number" required 
+                                        class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none" 
+                                        placeholder="Enter sender account number">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Recipient Account</label>
+                                    <input type="text" name="recipient_account_number" required 
+                                        class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none" 
+                                        placeholder="Enter recipient account number">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Transaction ID</label>
+                                <input type="text" name="transaction_id" required 
+                                    class="w-full px-4 py-3 fraud-input rounded-lg focus:outline-none" 
+                                    placeholder="Enter unique transaction ID">
+                            </div>
+
+                            <button type="submit" class="w-full px-6 py-4 fraud-btn-primary text-white font-semibold rounded-lg">
+                                🔍 Analyze Transaction for Fraud
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Fraud Detection Results -->
+                    <div class="fraud-card p-8 rounded-2xl">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            🎯 Detection Results
+                        </h2>
+                        <div id="fraudResult" class="text-center py-12">
+                            <div class="text-6xl mb-4">🔍</div>
+                            <p class="text-gray-400">Submit a transaction to analyze for potential fraud</p>
+                        </div>
+
+                        <div class="mt-6 space-y-3">
+                            <button id="checkAnomalousBtn" disabled 
+                                class="w-full px-4 py-3 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition">
+                                📈 Check Latest Transaction Status
+                            </button>
+                            <button id="loadAllTransactionsBtn" 
+                                class="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition">
+                                📋 Load All Transaction History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction History -->
+                <div class="fraud-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold flex items-center">
+                            📊 Transaction History & Analytics
+                        </h2>
+                        <div class="flex space-x-2">
+                            <button id="refreshHistoryBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                                🔄 Refresh
+                            </button>
+                        </div>
+                    </div>
+                    <div id="transactionHistory" class="text-center py-8">
+                        <div class="text-4xl mb-4">📈</div>
+                        <p class="text-gray-400">Transaction history will appear here</p>
+                    </div>
+                </div>
+
+                <!-- API Testing Section -->
+                <div class="fraud-card p-8 rounded-2xl mt-8">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        🔧 API Testing & Diagnostics
+                    </h2>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <button id="testSubmitApi" class="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                            🧪 Test Submit API
+                        </button>
+                        <button id="testAnomalousApi" class="px-4 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition">
+                            ⚠️ Test Anomaly API
+                        </button>
+                        <button id="testDataApi" class="px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition">
+                            📊 Test Data API
+                        </button>
+                    </div>
+                    <div id="apiTestResults" class="bg-gray-900 p-4 rounded-lg min-h-[200px] font-mono text-sm overflow-x-auto">
+                        <p class="text-gray-400">API test results will appear here...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-16">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                            <rect width="48" height="48" rx="8" fill="#1a237e"/>
+                            <path d="M18 32L30 16M22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" class="logo-lines"/>
+                        </svg>
+                        <span class="logo-text">TRUSTLENS</span>
+                    </div>
+                    <p>AI-powered fraud detection for the Indian financial market. Secure, intelligent, and built for India.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="fraudcheck.html">Fraudcheck</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">🔗</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TRUSTLENS AI ANALYST. All rights reserved. Made in India 🇮🇳</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+    const API_BASE = window.location.hostname === 'localhost'
+        ? 'http://localhost:3001'
+        : 'https://codezilla-1-1jc8.onrender.com';
+</script>
+
+<script src="fraudcheck.js"></script>
+
+    
+
+</body>
+</html>
+
+
+
