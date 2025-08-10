@@ -7,10 +7,7 @@ Problem Statement FT1: AI-Powered Fraud Detection System
 Context: Financial fraud is a growing concern (FTC reports $12.5B losses in 2024). AI techniques are increasingly used to spot fraudulent behavior. This challenge is to create a real-time fraud detection tool for transactions.
 
 Presenting You the - "TRUSTLENS.", Revolutionizing Financial Security by Detecting Anomalies Before They Become Threats.
-
-  FRONTEND🔗 - https://codezilla-1tjl.vercel.app/
-  BACKEND 🔗 -
-
+WEBSITE URL-https://project-mopb.vercel.app/
 Summary: In a World where cash is most expensive commodity , cyber thefts, fraud and scamming has become a common entity . TrustLens. Provides an interface whereby, A client can verify the nature of the transaction , and characterstics of the sender, whether he is flagged or monitored for malicious activity. We provide a User Friendly Interface to propvide client a secure platform to check for scam intrustions .
 
 FRAUD CHECK FEATURE : Using basic inputs from the user and transcation id incase transcation is dopne , we aim to flag reciever based upon certain behaviuours trained under GNN - Graphical Neural Network and certain criterias like repeated payments , different locations and other such algorithms which is implemented/yet to be implemented . We provide this easy access website mainly to check transcation Fraud probabilty rate , whereby clients could view the Flagged Reciever , but also the reason for being flagged
